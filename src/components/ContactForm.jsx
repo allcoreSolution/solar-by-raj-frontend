@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { api } from "../api/client";
 import { site } from "../data/site";
 import { digits } from "../utils/digits";
@@ -22,6 +22,13 @@ export default function ContactForm() {
   const [done, setDone] = useState("");
   const [apiErr, setApiErr] = useState("");
   const toast = useToast();
+
+  // Auto-refresh the page 3 seconds after a successful request
+  useEffect(() => {
+    if (!done) return;
+    const timer = setTimeout(() => window.location.reload(), 3000);
+    return () => clearTimeout(timer);
+  }, [done]);
 
   const set = (k) => (e) => {
     let v = e.target.value;

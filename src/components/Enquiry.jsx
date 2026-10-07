@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { api } from "../api/client";
 import { site } from "../data/site";
@@ -58,8 +57,8 @@ export default function EnquirySection() {
   useEffect(() => {
     if (!done) return;
     const timer = setTimeout(() => {
-  window.location.href = window.location.href;
-}, 2000);
+      window.location.reload();
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [done]);
@@ -461,5 +460,3 @@ Question: ${f.message}`
     </section>
   );
 }
-
-

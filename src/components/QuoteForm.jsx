@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api/client";
 import { digits } from "../utils/digits";
@@ -13,6 +13,13 @@ export default function QuoteForm() {
   const [res, setRes] = useState(null);
   const [note, setNote] = useState({ ok: true, text: "" });
   const [busy, setBusy] = useState(false);
+
+  // Auto-refresh the page 8 seconds after the request is saved (gives time to read the estimate)
+  useEffect(() => {
+    if (!res || busy || !note.ok || !note.text) return;
+    const timer = setTimeout(() => window.location.reload(), 8000);
+    return () => clearTimeout(timer);
+  }, [res, busy, note]);
 
   const set = (k) => (e) => {
     let v = e.target.value;
