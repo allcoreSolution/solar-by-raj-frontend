@@ -1,3 +1,5 @@
+
+
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../api/client";
 import "../styles/admin.css";
@@ -574,7 +576,7 @@ function ProjectsView({ items, loading, onAdd, onEdit, onDelete, picker, busy, o
 }
 
 function ProjectModal({ project, onClose, onSaved }) {
-  const [form, setForm] = useState({ title: project?.title || "", type: project?.type || "Home", location: project?.location || "", sizeKw: project?.sizeKw || "", image: project?.image || "", imageUrl: project?.image || project?.images?.[0] || "", description: project?.description || "", savingsPerYear: project?.savingsPerYear || "", description: project?.description || "", featured: !!project?.featured });
+  const [form, setForm] = useState({ title: project?.title || "", type: project?.type || "Home", location: project?.location || "", sizeKw: project?.sizeKw || "", image: project?.image || "", imageUrl: project?.image || project?.images?.[0] || "", description: project?.description || "", savingsPerYear: project?.savingsPerYear || "", featured: !!project?.featured });
   const [busy, setBusy] = useState(false); const [error, setError] = useState("");
   async function submit(e) { e.preventDefault(); setBusy(true); setError(""); const url=form.imageUrl.trim(); if(!/^https?:\/\//i.test(url)){setError("Please paste one valid image link starting with http:// or https://");setBusy(false);return;} const images=[url]; try { const body={...form,sizeKw:Number(form.sizeKw||0),savingsPerYear:Number(form.savingsPerYear||0),images,image:images[0]}; if(project) await api.patch(`/admin/projects/${project._id}`,body); else await api.post("/admin/projects",body); await onSaved(); } catch(e){setError(e.message||"Unable to save project");} finally{setBusy(false);} }
   return <div className="modal-backdrop"><form className="record-modal" onSubmit={submit}><div className="modal-head"><div><span>{project?"EDIT PROJECT":"NEW PROJECT"}</span><h2>{project?"Edit Project":"Add Project"}</h2></div><button type="button" onClick={onClose}>×</button></div>{error&&<div className="admin-error">{error}</div>}<div className="form-grid">
