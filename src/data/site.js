@@ -1,9 +1,9 @@
 export const site = {
   name: "Solar Pro Energy",
-  phone: "+91 9559573669",
-  phoneHref: "tel:+91 9559573669",
-  whatsapp: "https://wa.me/919559573669?text=Hello%20Solar%20Pro%20Energy%2C%20I%20am%20interested%20in%20solar%20installation.%20Please%20share%20more%20details.",
-  email: "rajy9696adav@gmail.com",
+  phone: "+91 XXXXXXXXX",
+  phoneHref: "tel:+91 XXXXXXXXX",
+  whatsapp: "https://wa.me/91XXXXXXXXXX?text=Hello%20Solar%20Pro%20Energy%2C%20I%20am%20interested%20in%20solar%20installation.%20Please%20share%20more%20details.",
+  email: "XXXXXXXXXX@gmail.com",
   address: " Lucknow , Uttar Pradesh, India",
   map: "lucknow map link",
   stats: [["Installations", 151, "+"], ["Bill savings", 99.9, "%"], ["Years panel life", 25, "+"]],

@@ -64,7 +64,10 @@
 // ------------------------------------------------------------
 
 const API_BASE = String(
-  import.meta.env.VITE_API_URL || "/api"
+  import.meta.env.VITE_API_URL ||
+    (import.meta.env.PROD
+      ? "https://solar-by-raj-backend-2.onrender.com/api"
+      : "/api")
 ).replace(/\/+$/, "");
 
 
@@ -200,6 +203,10 @@ const request = async (url, options = {}) => {
   // Successful Response
   // ----------------------------------------------------------
 
+  if (data === null && options.method && options.method !== "GET") {
+    throw new Error("Server did not respond correctly. Check the API URL.");
+  }
+
   return data;
 };
 
@@ -257,4 +264,3 @@ export const api = {
 // ============================================================
 
 export default api;
-
