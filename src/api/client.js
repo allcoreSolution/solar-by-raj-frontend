@@ -1,9 +1,20 @@
-const API_BASE = String(
-  import.meta.env.VITE_API_URL ||
-    (import.meta.env.PROD
-      ? "https://solar-by-raj-backend-2.onrender.com/api"
-      : "/api")
-).replace(/\/+$/, "");
+
+
+const PROD_API = "https://solar-by-raj-backend-2.onrender.com/api";
+
+const resolveApiBase = () => {
+  const env = String(import.meta.env.VITE_API_URL || "").trim().replace(/\/+$/, "");
+
+  // Use env only if it is a full http(s) URL. Always make sure it ends with /api.
+  if (/^https?:\/\//i.test(env)) {
+    return /\/api$/i.test(env) ? env : `${env}/api`;
+  }
+
+  // Wrong/missing env in production -> use the live backend.
+  return import.meta.env.PROD ? PROD_API : "/api";
+};
+
+const API_BASE = resolveApiBase();
 
 
 // ============================================================
@@ -139,7 +150,9 @@ const request = async (url, options = {}) => {
   // ----------------------------------------------------------
 
   if (data === null && options.method && options.method !== "GET") {
-    throw new Error("Server did not respond correctly. Check the API URL.");
+    throw new Error(
+      `Server did not respond correctly (HTTP ${response.status}) at ${API_BASE}${url}`
+    );
   }
 
   return data;
