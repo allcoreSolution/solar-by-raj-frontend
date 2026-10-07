@@ -1962,49 +1962,28 @@ section.trust{padding:48px 0 52px;background:linear-gradient(180deg,#0b1f4d,#0a1
 @media(prefers-reduced-motion:reduce){.trust .ttrack{transition:none}}
 
 /* ============================================================
-   FIX: textarea label cut / overlap (Contact + Enquiry forms)
-   - taller textarea, label gets a background so scrolled text
-     never shows under it or gets clipped at the top border
+   FIX: message box (textarea) - typed text no longer slides under
+   the floating label or gets cut at the top border.
+   Layout / sizes are unchanged; the floated label just gets a
+   solid background so it acts as a "header strip" over the text.
    ============================================================ */
-.sv .fld textarea{
-  display:block;
-  height:110px;
-  min-height:110px;
-  padding:30px 14px 10px;
-  line-height:1.5;
-  overflow-y:auto;
-  resize:vertical;
-}
-.sv-sm .fld textarea{
-  height:100px;
-  min-height:100px;
-  padding:28px 12px 8px;
-}
-.sv .fld textarea + label,
 .sv .fld textarea:focus + label,
 .sv .fld textarea:not(:placeholder-shown) + label{
-  top:2px;
-  left:14px;
-  right:18px;
-  padding:6px 0 4px;
-  font-size:12px;
+  top:1.5px;
+  left:1.5px;
+  right:16px;                 /* keep the textarea scrollbar free */
+  box-sizing:border-box;
+  height:19.5px;              /* = textarea top padding (22px) - border */
+  padding:4.5px 0 0 12.5px;
   line-height:1.2;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
   background:var(--card);
-  border-radius:8px 8px 0 0;
-  z-index:1;
+  border-radius:9px 9px 0 0;
 }
-.sv .fld textarea:focus + label,
-.sv .fld textarea:not(:placeholder-shown) + label{
-  font-size:11px;
-  font-weight:700;
-  color:var(--blue);
-}
-.sv-sm .fld textarea + label,
 .sv-sm .fld textarea:focus + label,
 .sv-sm .fld textarea:not(:placeholder-shown) + label{
-  top:2px;
-  left:12px;
+  height:16.5px;              /* = textarea top padding (19px) - border */
+  padding:2.5px 0 0 10.5px;
 }
